@@ -1,0 +1,410 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  11pt,
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Practical II: epidemiological surveillance and modelling (spatial)},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Practical II: epidemiological surveillance and modelling
+(spatial)}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+Pathogens move between different geographical units because of movements
+of animals or humans or other hosts. Spatial patterns of infectious
+disease transmission arise from heterogeneity in the landscape in which
+transmission occurs. In large and dense cities for example transmission
+intensity tends to be higher compared to rural areas. Spatial dispersal
+in ecology and epidemiology is often approximated by an exponential
+(probability of dispersal at a distance follows dispersal ∝ exp(-d/ɑ),
+where ɑ is the radius within which an infected plant can infect
+non-infected plants, or Gaussian kernel (dispersal ∝ \(exp(-(d/ɑ)^2)\)
+and d is the distance between locations of interest.
+
+For human infectious diseases the process of dispersal rarely follows a
+continuous spatial expansion but rather spread is better approximated by
+the spatial organisation of cities and towns. For example, emerging
+infectious diseases appear first in large urban agglomerations that are
+connected via air travel and then follow human movements from there to
+other larger cities or rural counties. The SARS-CoV-2 Omicron variant
+for example first spread in London where most travellers from abroad
+arrived.
+
+In this practical we will learn about continuous spatial spread using
+spatial kernels before investigating the impact of human mobility on
+spatial dispersal of infectious diseases. The code has been adapted from
+Chapter 11 of the Epidemics Book by Ottar Bjornstad and additional code
+can be found here:
+\url{https://github.com/objornstad/epimdr/blob/master/rcode/chapter11code.r}
+
+There will be a 15 minute break after ca. 1h ½.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Required packages for practicle}
+\ControlFlowTok{if}\NormalTok{ (}\SpecialCharTok{!}\FunctionTok{require}\NormalTok{(}\StringTok{"pacman"}\NormalTok{)) }\FunctionTok{install.packages}\NormalTok{(}\StringTok{"pacman"}\NormalTok{)}
+\NormalTok{pkgs }\OtherTok{=}
+  \FunctionTok{c}\NormalTok{(}\StringTok{"knitr"}\NormalTok{, }\StringTok{"rmarkdown"}\NormalTok{, }\StringTok{"pander"}\NormalTok{, }\StringTok{"EpiEstim"}\NormalTok{,}
+    \StringTok{"ggplot2"}\NormalTok{,}\StringTok{"incidence"}\NormalTok{) }\CommentTok{\# End}
+\NormalTok{pacman}\SpecialCharTok{::}\FunctionTok{p\_load}\NormalTok{(pkgs, }\AttributeTok{character.only =}\NormalTok{ T)}
+
+\CommentTok{\# remove unwanted objects (package list)}
+\FunctionTok{rm}\NormalTok{(pkgs)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{practical-ii-questions}{%
+\subsection{Practical II Questions}\label{practical-ii-questions}}
+
+\hypertarget{q1-what-determines-the-spatial-spread-of-infectious-diseases}{%
+\paragraph{Q1: What determines the spatial spread of infectious
+diseases?}\label{q1-what-determines-the-spatial-spread-of-infectious-diseases}}
+
+~
+
+Contrast spread of plant diseases vs.~human infectious diseases. Here a
+visualisation of human movement patterns in the UK:
+\url{https://www.science.org/cms/10.1126/science.abj0113/asset/c322ab29-d54d-42ef-8412-4e6789f1fcbd/assets/images/large/science.abj0113-f1.jpg}
+and dynamics of measles diffusion in the UK:
+\url{https://www.nature.com/articles/s41559-020-1186-6/figures/3}
+
+Here a link to more continuous diffusion of Aedes albopictus in the USA
+and Europe:
+\url{https://www.nature.com/articles/s41564-019-0376-y/figures/1}
+
+\hypertarget{q2-what-are-common-disease-surveillance-data-and-what-are-their-pros-and-cons-name-4-at-most.-ca.-15-minutes}{%
+\paragraph{Q2: What are common disease surveillance data and what are
+their pros and cons? Name 4 at most. (ca. 15
+minutes)}\label{q2-what-are-common-disease-surveillance-data-and-what-are-their-pros-and-cons-name-4-at-most.-ca.-15-minutes}}
+
+~
+
+\hypertarget{q3-what-are-some-of-the-common-challenges-with-public-health-surveillance-at-the-beginning-of-disease-outbreaks-ca.-5-minutes}{%
+\paragraph{Q3: What are some of the common challenges with public health
+surveillance at the beginning of disease outbreaks? (ca. 5
+minutes)}\label{q3-what-are-some-of-the-common-challenges-with-public-health-surveillance-at-the-beginning-of-disease-outbreaks-ca.-5-minutes}}
+
+~
+
+\hypertarget{q4-describe-the-key-data-sources-necessary-to-estimate-the-time-varying-reproduction-number-rt-httpsacademic.oup.comajearticle1789150589262-focus-on-main-manuscript-and-high-level-insights.ca.-20-minutes}{%
+\paragraph{\texorpdfstring{Q4: Describe the key data sources necessary
+to estimate the time-varying reproduction number Rt:
+\url{https://academic.oup.com/aje/article/178/9/1505/89262}? Focus on
+main manuscript and high level insights.(ca. 20
+minutes)}{Q4: Describe the key data sources necessary to estimate the time-varying reproduction number Rt: https://academic.oup.com/aje/article/178/9/1505/89262? Focus on main manuscript and high level insights.(ca. 20 minutes)}}\label{q4-describe-the-key-data-sources-necessary-to-estimate-the-time-varying-reproduction-number-rt-httpsacademic.oup.comajearticle1789150589262-focus-on-main-manuscript-and-high-level-insights.ca.-20-minutes}}
+
+~
+
+\hypertarget{q5-please-install-the-r-package-epiestim-and-load-it-httpscran.r-project.orgwebpackagesepiestimindex.html-and-familiarize-yourself-with-the-documentation.-remove-any-objects-from-your-workspace.-copy-the-code-to-install-the-package-below.-ca.-15-min}{%
+\paragraph{\texorpdfstring{Q5: Please install the R-package `EpiEstim'
+and load it
+(\url{https://cran.r-project.org/web/packages/EpiEstim/index.html}), and
+familiarize yourself with the documentation. Remove any objects from
+your workspace. Copy the code to install the package below. (ca. 15
+min)}{Q5: Please install the R-package `EpiEstim' and load it (https://cran.r-project.org/web/packages/EpiEstim/index.html), and familiarize yourself with the documentation. Remove any objects from your workspace. Copy the code to install the package below. (ca. 15 min)}}\label{q5-please-install-the-r-package-epiestim-and-load-it-httpscran.r-project.orgwebpackagesepiestimindex.html-and-familiarize-yourself-with-the-documentation.-remove-any-objects-from-your-workspace.-copy-the-code-to-install-the-package-below.-ca.-15-min}}
+
+~
+
+\hypertarget{q6-install-the-most-used-visualisation-package-in-r-that-is-recommended-by-epiestim}{%
+\paragraph{Q6: Install the most used visualisation package in R that is
+recommended by
+`EpiEstim'}\label{q6-install-the-most-used-visualisation-package-in-r-that-is-recommended-by-epiestim}}
+
+~
+
+\hypertarget{q7-load-and-visualise-flu-incidence-data-contained-in-the-package.-plot-the-figure-and-add-a-caption-to-the-plot.}{%
+\paragraph{Q7: Load and visualise flu incidence data contained in the
+package. Plot the figure and add a caption to the
+plot.}\label{q7-load-and-visualise-flu-incidence-data-contained-in-the-package.-plot-the-figure-and-add-a-caption-to-the-plot.}}
+
+\hypertarget{q8-estimating-time-varying-reproduction-number-rt.}{%
+\paragraph{Q8: Estimating time varying reproduction number,
+Rt.}\label{q8-estimating-time-varying-reproduction-number-rt.}}
+
+~
+
+We can run estimate\_R on the incidence data to estimate the time
+varying reproduction number R. For this, we need to specify i) the time
+window(s) over which to estimate Rt and ii) information on the
+distribution of the serial interval (SI).
+
+For i), the default behavior is to estimate Rt over weekly sliding
+windows (for example: window 1 = 01Jan2020 to 07Jan2020, window 2 =
+02Jan2020 to 08Jan2020, window 3 = 03Jan2020 to 09Jan2020, etc). This
+can be changed through the config\$t\_start and config\$t\_end arguments
+(see below, ``Changing the time windows for estimation''). For ii),
+there are several options, specified in the method argument.
+
+The simplest is the parametric\_si method, where you only specify the
+mean and standard deviation of the SI.
+
+In this example, we only specify the mean and standard deviation of the
+serial interval. In the following example, we use the mean (2.6 days)
+and standard deviation (1.5) of the serial interval for flu from
+Ferguson et al., Nature, 2005:
+\url{https://www.nature.com/articles/nature04017}
+
+Plot the code below and explain each panel. (ca. 10 minutes)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{res\_parametric\_si }\OtherTok{\textless{}{-}} \FunctionTok{estimate\_R}\NormalTok{(Flu2009}\SpecialCharTok{$}\NormalTok{incidence, }
+\AttributeTok{method=}\StringTok{"parametric\_si"}\NormalTok{,}
+\AttributeTok{config =} \FunctionTok{make\_config}\NormalTok{(}\FunctionTok{list}\NormalTok{(}
+\AttributeTok{mean\_si =} \FloatTok{2.6}\NormalTok{, }\AttributeTok{std\_si =} \FloatTok{1.5}\NormalTok{)))}
+\FunctionTok{plot}\NormalTok{(res\_parametric\_si, }\AttributeTok{legend =} \ConstantTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{q9-based-on-the-above-plot-describe-the-epidemiological-dynamics-of-the-outbreak-by-referencing-the-change-in-the-time-varying-reproduction-number-rt.-ca.-10-minutes}{%
+\paragraph{Q9: Based on the above plot, describe the epidemiological
+dynamics of the outbreak by referencing the change in the time-varying
+reproduction number, Rt. (ca. 10
+minutes)}\label{q9-based-on-the-above-plot-describe-the-epidemiological-dynamics-of-the-outbreak-by-referencing-the-change-in-the-time-varying-reproduction-number-rt.-ca.-10-minutes}}
+
+~
+
+\hypertarget{q10-estimating-rt-with-a-non-parametric-serial-interval-distribution}{%
+\paragraph{Q10: Estimating Rt with a non parametric serial interval
+distribution}\label{q10-estimating-rt-with-a-non-parametric-serial-interval-distribution}}
+
+~
+
+If one already has a full distribution of the serial interval, and not
+only a mean and standard deviation, this can be fed into estimate\_r as
+follows.
+
+Plot serial interval distribution and outputs from this model. Provide a
+perspective on what the SI distribution means for estimating
+transmission. (ca. 15 minutes)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(Flu2009}\SpecialCharTok{$}\NormalTok{si\_distr)}
+\NormalTok{res\_non\_parametric\_si }\OtherTok{\textless{}{-}} \FunctionTok{estimate\_R}\NormalTok{(Flu2009}\SpecialCharTok{$}\NormalTok{incidence, }\AttributeTok{method=}\StringTok{"non\_parametric\_si"}\NormalTok{,}
+\AttributeTok{config =} \FunctionTok{make\_config}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{si\_distr =}\NormalTok{ Flu2009}\SpecialCharTok{$}\NormalTok{si\_distr)))}
+\FunctionTok{plot}\NormalTok{(res\_non\_parametric\_si, }\StringTok{"R"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{q11-estimating-r-accounting-for-uncertainty-on-the-serial-interval-distribution}{%
+\paragraph{Q11: Estimating R accounting for uncertainty on the serial
+interval
+distribution}\label{q11-estimating-r-accounting-for-uncertainty-on-the-serial-interval-distribution}}
+
+~
+
+Sometimes, especially early in outbreaks, the serial interval
+distribution can be poorly specified. Therefore estimate\_R also allows
+integrating results over various distributions of the serial interval.
+To do so, the mean and sd of the serial interval are each drawn from
+truncated normal distributions, with parameters specified by the user,
+as in the example below:
+
+We choose to draw:
+
+\begin{itemize}
+\item
+  The mean of the SI in a Normal(2.6, 1), truncated at 1 and 4.2. This
+  truncated normal distribution is centred around 2.6, which was the
+  mean of the SI distribution in Q8. Here we add uncertainty in the mean
+  parameter, but restrict it to lie between 1 and 4.2.
+\item
+  The sd of the SI in a Normal(1.5, 0.5), truncated at 0.5 and 2.5.
+  Similarly, here we add uncertainty to the standard deviation of 1.5
+  described in Q8, and limit this to lie between the reasonable range of
+  0.5 and 2.5.
+\end{itemize}
+
+Provide the outputs from the model and describe the bottom plot in light
+of the uncertainty about the SI distribution.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{config }\OtherTok{\textless{}{-}} \FunctionTok{make\_config}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{mean\_si =} \FloatTok{2.6}\NormalTok{, }\AttributeTok{std\_mean\_si =} \DecValTok{1}\NormalTok{,}
+\AttributeTok{min\_mean\_si =} \DecValTok{1}\NormalTok{, }\AttributeTok{max\_mean\_si =} \FloatTok{4.2}\NormalTok{,}
+\AttributeTok{std\_si =} \FloatTok{1.5}\NormalTok{, }\AttributeTok{std\_std\_si =} \FloatTok{0.5}\NormalTok{,}
+\AttributeTok{min\_std\_si =} \FloatTok{0.5}\NormalTok{, }\AttributeTok{max\_std\_si =} \FloatTok{2.5}\NormalTok{))}
+\NormalTok{res\_uncertain\_si }\OtherTok{\textless{}{-}} \FunctionTok{estimate\_R}\NormalTok{(Flu2009}\SpecialCharTok{$}\NormalTok{incidence,}
+\AttributeTok{method =} \StringTok{"uncertain\_si"}\NormalTok{, }\AttributeTok{config =}\NormalTok{ config)}
+\FunctionTok{plot}\NormalTok{(res\_uncertain\_si)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{q12-changing-the-time-windows-for-estimation}{%
+\paragraph{Q12: Changing the time windows for
+estimation}\label{q12-changing-the-time-windows-for-estimation}}
+
+~
+
+The time window can be specified through arguments config\$t\_start and
+config\$t\_end. For instance, the default weekly sliding windows can
+also be obtained by specifying:
+
+Describe how the estimate of Rt compares to previous estimates (ca. 15
+minutes):
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{T }\OtherTok{\textless{}{-}} \FunctionTok{nrow}\NormalTok{(Flu2009}\SpecialCharTok{$}\NormalTok{incidence)}
+\NormalTok{t\_start }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\DecValTok{2}\NormalTok{, T}\DecValTok{{-}10}\NormalTok{) }
+\NormalTok{t\_end }\OtherTok{\textless{}{-}}\NormalTok{ t\_start }\SpecialCharTok{+} \DecValTok{10} \CommentTok{\# adding 10 to get 11{-}day windows as bounds included in window}
+\NormalTok{res\_weekly }\OtherTok{\textless{}{-}} \FunctionTok{estimate\_R}\NormalTok{(Flu2009}\SpecialCharTok{$}\NormalTok{incidence, }
+\AttributeTok{method=}\StringTok{"parametric\_si"}\NormalTok{,}
+\AttributeTok{config =} \FunctionTok{make\_config}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{t\_start =}\NormalTok{ t\_start,}
+\AttributeTok{t\_end =}\NormalTok{ t\_end,}\AttributeTok{mean\_si =} \FloatTok{2.6}\NormalTok{, }\AttributeTok{std\_si =} \FloatTok{1.5}\NormalTok{)))}
+\FunctionTok{plot}\NormalTok{(res\_weekly) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{q13-specifying-imported-cases}{%
+\paragraph{Q13: Specifying imported
+cases}\label{q13-specifying-imported-cases}}
+
+~
+
+All of the above assumes that all cases are linked by local transmission
+(eg- within country). Sometimes you may have information (from field
+epidemiological investigations for instance) indicating that some cases
+are in fact imported (from another location (eg internationally), or
+from an animal reservoir). See some more details on the estimation in
+this publication:
+\url{https://www.sciencedirect.com/science/article/pii/S1755436519300350?via\%3Dihub}.
+We allow to include such information, when available, as illustrated in
+the example below: generating fake information on our cases:
+
+Compare estimates of Rt for this model compared to earlier models that
+do not consider imported cases. What is the impact on local Rt? (ca. 15
+minutes)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dates\_onset }\OtherTok{\textless{}{-}}\NormalTok{ Flu2009}\SpecialCharTok{$}\NormalTok{incidence}\SpecialCharTok{$}\NormalTok{dates[}\FunctionTok{unlist}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(Flu2009}\SpecialCharTok{$}\NormalTok{incidence), }
+  \ControlFlowTok{function}\NormalTok{(i) }
+  \FunctionTok{rep}\NormalTok{(i, Flu2009}\SpecialCharTok{$}\NormalTok{incidence}\SpecialCharTok{$}\NormalTok{I[i])))]}
+
+\NormalTok{location }\OtherTok{\textless{}{-}} \FunctionTok{sample}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"local"}\NormalTok{,}\StringTok{"imported"}\NormalTok{), }\FunctionTok{length}\NormalTok{(dates\_onset), }\AttributeTok{replace=}\ConstantTok{TRUE}\NormalTok{)}
+
+\NormalTok{location[}\DecValTok{1}\NormalTok{] }\OtherTok{\textless{}{-}} \StringTok{"imported"} \CommentTok{\# forcing the first case to be imported}
+
+\DocumentationTok{\#\# get incidence per group (location)}
+\NormalTok{incid }\OtherTok{\textless{}{-}} \FunctionTok{incidence}\NormalTok{(dates\_onset, }\AttributeTok{groups =}\NormalTok{ location)}
+
+\FunctionTok{plot}\NormalTok{(incid)}
+
+\DocumentationTok{\#\# Estimate R with assumptions on serial interval:}
+\NormalTok{res\_with\_imports }\OtherTok{\textless{}{-}} \FunctionTok{estimate\_R}\NormalTok{(incid, }\AttributeTok{method =} \StringTok{"parametric\_si"}\NormalTok{,}
+\AttributeTok{config =} \FunctionTok{make\_config}\NormalTok{(}\FunctionTok{list}\NormalTok{(}\AttributeTok{mean\_si =} \FloatTok{2.6}\NormalTok{, }\AttributeTok{std\_si =} \FloatTok{1.5}\NormalTok{)))}
+
+\CommentTok{\# Default config will estimate R on weekly sliding windows.}
+\CommentTok{\# To change this change the t\_start and t\_end arguments.}
+\FunctionTok{plot}\NormalTok{(res\_with\_imports, }\AttributeTok{add\_imported\_cases=}\ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{q14-name-other-sources-of-uncertainty-in-the-rt-estimation}{%
+\subsubsection{Q14: Name other sources of uncertainty in the Rt
+estimation?}\label{q14-name-other-sources-of-uncertainty-in-the-rt-estimation}}
+
+\end{document}

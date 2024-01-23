@@ -1,0 +1,191 @@
+---
+title: 'Practical II: epidemiological surveillance and modelling (spatial)'
+output:
+  html_document:
+    df_print: paged
+  pdf_document: default
+keep_tex: yes
+fig_caption: yes
+geometry: margin=1in
+fontsize: 11pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE, fig.path='Figs/', fig.width=10, fig.height=4, root.dir = '')
+```
+
+Pathogens move between different geographical units because of movements of animals or humans or other hosts. Spatial patterns of infectious disease transmission arise from heterogeneity in the landscape in which transmission occurs. In large and dense cities for example transmission intensity tends to be higher compared to rural areas. Spatial dispersal in ecology and epidemiology is often approximated by an exponential (probability of dispersal at a distance follows  dispersal ∝ exp(-d/ɑ), where ɑ is the radius within which an infected plant can infect non-infected plants, or Gaussian kernel (dispersal ∝ $exp(-(d/ɑ)^2)$ and d is the distance between locations of interest.
+
+For human infectious diseases the process of dispersal rarely follows a continuous spatial expansion but rather spread is better approximated by the spatial organisation of cities and towns. For example, emerging infectious diseases appear first in large urban agglomerations that are connected via air travel and then follow human movements from there to other larger cities or rural counties. The SARS-CoV-2 Omicron variant for example first spread in London where most travellers from abroad arrived.
+
+In this practical we will learn about continuous spatial spread using spatial kernels before investigating the impact of human mobility on spatial dispersal of infectious diseases. The code has been adapted from Chapter 11 of the Epidemics Book by Ottar Bjornstad and additional code can be found here: https://github.com/objornstad/epimdr/blob/master/rcode/chapter11code.r 
+
+There will be a 15 minute break after ca. 1h ½.
+
+
+```{r Load required packages,echo=TRUE}
+# Required packages for practicle
+if (!require("pacman")) install.packages("pacman")
+pkgs =
+  c("knitr", "rmarkdown", "pander", "EpiEstim",
+    "ggplot2","incidence") # End
+pacman::p_load(pkgs, character.only = T)
+
+# remove unwanted objects (package list)
+rm(pkgs)
+
+```
+
+
+## Practical II Questions
+
+#### Q1: What determines the spatial spread of infectious diseases?
+
+<p>&nbsp;</p>
+
+Contrast spread of plant diseases vs. human infectious diseases. Here a visualisation of human movement patterns in the UK: https://www.science.org/cms/10.1126/science.abj0113/asset/c322ab29-d54d-42ef-8412-4e6789f1fcbd/assets/images/large/science.abj0113-f1.jpg and dynamics of measles diffusion in the UK: https://www.nature.com/articles/s41559-020-1186-6/figures/3 
+
+Here a link to more continuous diffusion of Aedes albopictus in the USA and Europe: https://www.nature.com/articles/s41564-019-0376-y/figures/1  
+
+
+
+#### Q2: What are common disease surveillance data and what are their pros and cons? Name 4 at most. (ca. 15 minutes)
+
+<p>&nbsp;</p>
+
+#### Q3: What are some of the common challenges with public health surveillance at the beginning of disease outbreaks? (ca. 5 minutes)
+
+<p>&nbsp;</p>
+
+#### Q4: Describe the key data sources necessary to estimate the time-varying reproduction number Rt: https://academic.oup.com/aje/article/178/9/1505/89262? Focus on main manuscript and high level insights.(ca. 20 minutes)
+
+<p>&nbsp;</p>
+
+#### Q5: Please install the R-package ‘EpiEstim’ and load it (https://cran.r-project.org/web/packages/EpiEstim/index.html), and familiarize yourself with the documentation. Remove any objects from your workspace. Copy the code to install the package below. (ca. 15 min)
+
+<p>&nbsp;</p>
+
+#### Q6: Install the most used visualisation package in R that is recommended by ‘EpiEstim’
+
+<p>&nbsp;</p>
+
+#### Q7: Load and visualise flu incidence data contained in the package. Plot the figure and add a caption to the plot.
+
+```{r Create incidence plot, echo=FALSE}
+data(Flu2009)
+library(incidence)
+```
+
+
+#### Q8: Estimating time varying reproduction number, Rt.
+<p>&nbsp;</p>
+We can run estimate_R on the incidence data to estimate the time varying reproduction number R. For this, we need to specify i) the time window(s) over which to estimate Rt and ii) information on the distribution of the serial interval (SI).
+
+For i), the default behavior is to estimate Rt over weekly sliding windows (for example: window 1 = 01Jan2020 to 07Jan2020, window 2 = 02Jan2020 to 08Jan2020, window 3 = 03Jan2020 to 09Jan2020, etc). This can be changed through the config\$t_start and 
+config\$t_end arguments (see below, “Changing the time windows for estimation”). For ii), there are several options, specified in the method argument.
+
+The simplest is the parametric_si method, where you only specify the mean and standard deviation of the SI.
+
+In this example, we only specify the mean and standard deviation of the serial interval. In the following example, we use the mean (2.6 days) and standard deviation (1.5) of the serial interval for flu from Ferguson et al., Nature, 2005: https://www.nature.com/articles/nature04017 
+
+Plot the code below and explain each panel. (ca. 10 minutes)
+
+```{r Estimate Rt,echo=TRUE, fig.keep = "none"}
+res_parametric_si <- estimate_R(Flu2009$incidence, 
+method="parametric_si",
+config = make_config(list(
+mean_si = 2.6, std_si = 1.5)))
+plot(res_parametric_si, legend = FALSE)
+```
+
+#### Q9: Based on the above plot, describe the epidemiological dynamics of the outbreak by referencing the change in the time-varying reproduction number, Rt. (ca. 10 minutes)
+
+<p>&nbsp;</p>
+
+#### Q10: Estimating Rt with a non parametric serial interval distribution
+<p>&nbsp;</p>
+If one already has a full distribution of the serial interval, and not only a mean and standard deviation, this can be fed into estimate_r as follows.
+
+Plot serial interval distribution and outputs from this model. Provide a perspective on what the SI distribution means for estimating transmission. (ca. 15 minutes)
+
+```{r Plot SI,echo=TRUE, fig.keep = "none"}
+plot(Flu2009$si_distr)
+res_non_parametric_si <- estimate_R(Flu2009$incidence, method="non_parametric_si",
+config = make_config(list(si_distr = Flu2009$si_distr)))
+plot(res_non_parametric_si, "R")
+```
+
+
+
+#### Q11: Estimating R accounting for uncertainty on the serial interval distribution
+<p>&nbsp;</p>
+Sometimes, especially early in outbreaks, the serial interval distribution can be poorly specified. Therefore estimate_R also allows integrating results over various distributions of the serial interval. To do so, the mean and sd of the serial interval are each drawn from truncated normal distributions, with parameters specified by the user, as in the example below:
+
+We choose to draw:
+
+- The mean of the SI in a Normal(2.6, 1), truncated at 1 and 4.2. This truncated normal distribution is centred around 2.6, which was the mean of the SI distribution in Q8. Here we add uncertainty in the mean parameter, but restrict it to lie between 1 and 4.2.
+
+- The sd of the SI in a Normal(1.5, 0.5), truncated at 0.5 and 2.5. Similarly, here we add uncertainty to the standard deviation of 1.5 described in Q8, and limit this to lie between the reasonable range of 0.5 and 2.5.
+
+Provide the outputs from the model and describe the bottom plot in light of the uncertainty about the SI distribution.
+
+```{r Uncertainity,echo=TRUE, fig.keep = "none"}
+config <- make_config(list(mean_si = 2.6, std_mean_si = 1,
+min_mean_si = 1, max_mean_si = 4.2,
+std_si = 1.5, std_std_si = 0.5,
+min_std_si = 0.5, max_std_si = 2.5))
+res_uncertain_si <- estimate_R(Flu2009$incidence,
+method = "uncertain_si", config = config)
+plot(res_uncertain_si)
+```
+
+#### Q12: Changing the time windows for estimation
+<p>&nbsp;</p>
+The time window can be specified through arguments config\$t_start and config\$t_end. For instance, the default weekly sliding windows can also be obtained by specifying:
+
+Describe how the estimate of Rt compares to previous estimates (ca. 15 minutes):
+
+```{r time,echo=TRUE, fig.keep = "none"}
+T <- nrow(Flu2009$incidence)
+t_start <- seq(2, T-10) 
+t_end <- t_start + 10 # adding 10 to get 11-day windows as bounds included in window
+res_weekly <- estimate_R(Flu2009$incidence, 
+method="parametric_si",
+config = make_config(list(t_start = t_start,
+t_end = t_end,mean_si = 2.6, std_si = 1.5)))
+plot(res_weekly) 
+```
+
+
+#### Q13: Specifying imported cases
+<p>&nbsp;</p>
+All of the above assumes that all cases are linked by local transmission (eg- within country). Sometimes you may have information (from field epidemiological investigations for instance) indicating that some cases are in fact imported (from another location  (eg internationally), or from an animal reservoir). See some more details on the estimation in this publication: https://www.sciencedirect.com/science/article/pii/S1755436519300350?via%3Dihub. 
+We allow to include such information, when available, as illustrated in the example below: generating fake information on our cases:
+
+Compare estimates of Rt for this model compared to earlier models that do not consider imported cases. What is the impact on local Rt? (ca. 15 minutes)
+
+```{r Importations,echo=TRUE, fig.keep = "none"}
+dates_onset <- Flu2009$incidence$dates[unlist(lapply(1:nrow(Flu2009$incidence), 
+  function(i) 
+  rep(i, Flu2009$incidence$I[i])))]
+
+location <- sample(c("local","imported"), length(dates_onset), replace=TRUE)
+
+location[1] <- "imported" # forcing the first case to be imported
+
+## get incidence per group (location)
+incid <- incidence(dates_onset, groups = location)
+
+plot(incid)
+
+## Estimate R with assumptions on serial interval:
+res_with_imports <- estimate_R(incid, method = "parametric_si",
+config = make_config(list(mean_si = 2.6, std_si = 1.5)))
+
+# Default config will estimate R on weekly sliding windows.
+# To change this change the t_start and t_end arguments.
+plot(res_with_imports, add_imported_cases=TRUE)
+```
+
+### Q14: Name other sources of uncertainty in the Rt estimation?
+
